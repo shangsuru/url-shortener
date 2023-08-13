@@ -2,6 +2,7 @@
 
 import WorldMap from "react-svg-worldmap";
 import BarChart from "@/components/BarChart";
+import { MdQrCode2, MdOpenInNew, MdContentCopy } from "react-icons/md";
 
 export default function Data() {
   const mapData = [
@@ -20,20 +21,46 @@ export default function Data() {
   return (
     <div>
       <div className="card">
-        <div className="xl:flex xl:flex-left xl:justify-around">
-          <div className="mb-10">
-            <div>LinkShrink with visit url copy and qr code button</div>
-            <div>Actual URL</div>
-            <div>When it was created</div>
-            <div>Total Clicks 1234</div>
+        <div className="relative xl:flex xl:flex-left xl:justify-around">
+          <div className="mb-10 text-xl">
+            <div className="sm:flex sm:flex-left">
+              <div className="p-2 mr-20">
+                <span className="font-bold mr-3">longURL</span>
+                <a className="link" href="shortURL">
+                  shortURL
+                </a>
+              </div>
+              <div className="flex flex-left">
+                <div className="hover p-2">
+                  <MdOpenInNew color="grey" size="1.5em" />
+                </div>
+
+                <div className="hover p-2">
+                  <MdQrCode2 color="grey" size="1.5em" />
+                </div>
+                <div
+                  className="hover p-2"
+                  onClick={() => {
+                    navigator.clipboard.writeText("shortURL");
+                  }}
+                >
+                  <MdContentCopy color="grey" size="1.5em" />
+                </div>
+              </div>
+            </div>
+            <div className="mt-5 text-xl">
+              Total Clicks <span className="text-blue-500">1234</span>
+            </div>
           </div>
-          <WorldMap
-            color="var(--foreground)"
-            size="responsive"
-            data={mapData}
-            valueSuffix="%"
-            backgroundColor="var(--card)"
-          />
+          <div className="xl:ml-10">
+            <WorldMap
+              color="var(--foreground)"
+              size="responsive"
+              data={mapData}
+              valueSuffix="%"
+              backgroundColor="var(--card)"
+            />
+          </div>
         </div>
         <BarChart />
       </div>

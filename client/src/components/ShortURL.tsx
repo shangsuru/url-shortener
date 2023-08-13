@@ -21,7 +21,9 @@ export default function ShortURL({ longURL, shortURL }: ShortURLProps) {
           <MdQrCode2 color="grey" size="1.5em" />
         </div>
         <div className="hover p-2">
-          <MdBarChart color="grey" size="1.5em" />
+          <a href={`data?url=${shortURL}`}>
+            <MdBarChart color="grey" size="1.5em" />
+          </a>
         </div>
         <div
           className="link hover p-2"
