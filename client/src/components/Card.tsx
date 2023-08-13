@@ -17,11 +17,10 @@ export default function Card({
 }: CardProps) {
   return (
     <div>
-      <div className="bg-white p-5 sm:p-10 shadow-lg max-w-[1500px] text-md md:text-xl lg:text-2xl 2xl:text-4xl">
-        <h1 className="flex justify-center items-center text-2xl md:text-4xl lg:text-5xl 2xl:text-6xl">
+      <div className="bg-[var(--card)] p-5 sm:p-10 shadow-lg max-w-[1500px] text-md md:text-xl lg:text-2xl 2xl:text-4xl">
+        <h1 className="font-bold flex justify-center items-center text-2xl md:text-4xl lg:text-5xl 2xl:text-6xl mb-10 lg:mb-20">
           {title}
         </h1>
-        <hr class="h-px mt-6 mb-10 bg-gray-200 border-0 dark:bg-gray-700"></hr>
         <p className="flex justify-center items-center text-center sm:text-md sm:text-xl lg:text-2xl 2xl:text-4xl mt-5 2xl:mt-10  text-gray-500">
           {description}
         </p>

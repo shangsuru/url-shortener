@@ -21,14 +21,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div>{children}</div>
-        <div className="absolute bottom-0 right-0 m-5">
-          <a
-            href="https://henryhelm.com/projects"
-            className="hover:text-blue-500 transition"
-          >
-            Created by Henry @2023
-          </a>
-        </div>
       </body>
     </html>
   );

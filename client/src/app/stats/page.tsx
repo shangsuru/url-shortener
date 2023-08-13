@@ -6,7 +6,7 @@ export default function Stats() {
       <Card
         title="Track your short URLs"
         description="Enter the URL to find out how many clicks it has received so far, and other stuff."
-        inputPlaceholder="Enter your LinkShrink link here"
+        inputPlaceholder="Enter your LinkShrink here"
         buttonText="View Clicks"
         linkText="Short another URL"
         linkHref="/"
