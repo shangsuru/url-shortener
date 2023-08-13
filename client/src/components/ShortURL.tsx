@@ -1,6 +1,7 @@
 "use client";
 
 import { MdQrCode2, MdBarChart, MdClose } from "react-icons/md";
+import QRCodeModal from "./QRCodeModal";
 
 interface ShortURLProps {
   longURL: string;
@@ -18,7 +19,7 @@ export default function ShortURL({ longURL, shortURL }: ShortURLProps) {
       </div>
       <div className="flex flex-left">
         <div className="hover p-2">
-          <MdQrCode2 color="grey" size="1.5em" />
+          <QRCodeModal value={shortURL} />
         </div>
         <div className="hover p-2">
           <a href={`data?url=${shortURL}`}>

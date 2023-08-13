@@ -3,6 +3,7 @@
 import WorldMap from "react-svg-worldmap";
 import BarChart from "@/components/BarChart";
 import { MdQrCode2, MdOpenInNew, MdContentCopy } from "react-icons/md";
+import QRCodeModal from "@/components/QRCodeModal";
 
 export default function Data() {
   const mapData = [
@@ -36,7 +37,7 @@ export default function Data() {
                 </div>
 
                 <div className="hover p-2">
-                  <MdQrCode2 color="grey" size="1.5em" />
+                  <QRCodeModal value="shortURL" />
                 </div>
                 <div
                   className="hover p-2"
