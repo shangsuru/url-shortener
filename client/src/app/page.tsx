@@ -1,4 +1,5 @@
 import Card from "@/components/Card";
+import ShortURL from "@/components/ShortURL";
 
 export default function Home() {
   return (
@@ -11,6 +12,9 @@ export default function Home() {
         linkText="Show URL stats"
         linkHref="/stats"
       />
+      <div className="m-5">
+        <ShortURL longURL="henryhelm.com" shortURL="linkshrink.io/rgzbyax" />
+      </div>
     </div>
   );
 }

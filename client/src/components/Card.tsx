@@ -17,7 +17,7 @@ export default function Card({
 }: CardProps) {
   return (
     <div>
-      <div className="bg-[var(--card)] p-5 sm:p-10 shadow-lg max-w-[1500px] text-md md:text-xl lg:text-2xl 2xl:text-4xl">
+      <div className="card max-w-[1500px] text-md md:text-xl lg:text-2xl 2xl:text-4xl">
         <h1 className="font-bold flex justify-center items-center text-2xl md:text-4xl lg:text-5xl 2xl:text-6xl mb-10 lg:mb-20">
           {title}
         </h1>
@@ -36,7 +36,7 @@ export default function Card({
         </div>
 
         <div className="mt-10 2xl:mt-20 flex justify-center items-center">
-          <a href={linkHref} className="text-blue-500 hover:text-blue-700">
+          <a href={linkHref} className="link">
             {linkText}
           </a>
         </div>

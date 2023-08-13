@@ -19,7 +19,7 @@ export default function Data() {
 
   return (
     <div>
-      <div className="bg-[var(--card)] p-5 sm:p-10 shadow-lg">
+      <div className="card">
         <div className="xl:flex xl:flex-left xl:justify-around">
           <div className="mb-10">
             <div>LinkShrink with visit url copy and qr code button</div>
