@@ -25,15 +25,12 @@ export default function Data() {
         <div className="relative xl:flex xl:flex-left xl:justify-around">
           <div className="mb-10 text-xl">
             <div className="sm:flex sm:flex-left">
-              <div className="p-2 mr-20">
-                <span className="font-bold mr-3">longURL</span>
-                <a className="link" href="shortURL">
-                  shortURL
-                </a>
-              </div>
+              <div className="p-2 mr-20 font-bold">shortURL</div>
               <div className="flex flex-left">
                 <div className="hover p-2">
-                  <MdOpenInNew color="grey" size="1.5em" />
+                  <a href="shortURL" target="_blank">
+                    <MdOpenInNew color="grey" size="1.5em" />
+                  </a>
                 </div>
 
                 <div className="hover p-2">
