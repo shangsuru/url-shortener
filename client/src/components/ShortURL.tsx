@@ -1,3 +1,5 @@
+"use client";
+
 import { MdQrCode2, MdBarChart, MdClose } from "react-icons/md";
 
 interface ShortURLProps {
@@ -21,7 +23,14 @@ export default function ShortURL({ longURL, shortURL }: ShortURLProps) {
         <div className="hover p-2">
           <MdBarChart color="grey" size="1.5em" />
         </div>
-        <div className="link hover p-2">Copy</div>
+        <div
+          className="link hover p-2"
+          onClick={() => {
+            navigator.clipboard.writeText(shortURL);
+          }}
+        >
+          Copy
+        </div>
       </div>
       <div className="absolute top-0 right-0 hover:text-blue-500 cursor-pointer p-2">
         <MdClose size="1.5em" />
