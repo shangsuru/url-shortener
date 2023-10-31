@@ -5,9 +5,9 @@ class UrlsController < ApplicationController
     long_url = params[:long]
 
     # check if long_url already exists
-    @url = Url.find_by(long: long_url)
-    if @url
-      render json: @url, status: :ok
+    url = Url.find_by(long: long_url)
+    if url
+      render json: url.to_json( :only => [:short, :long] ), status: :ok
       return
     end
 
@@ -15,7 +15,7 @@ class UrlsController < ApplicationController
     short_url = shorten_url(long_url)
     url = Url.new(short: short_url, long: long_url, last_read_at: Time.now)
     if url.save
-      render json: url, status: :created
+      render json: url.to_json( :only => [:short, :long] ), status: :created
     else
       render json: { error: "Invalid URL" }, status: :unprocessable_entity
     end 
