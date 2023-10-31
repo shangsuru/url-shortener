@@ -1,13 +1,21 @@
-import { useState } from "react";
+"use client";
 
+import { useState } from "react";
 import ShortURL from "@/components/ShortURL";
+import axios from "axios";
+
+interface Url {
+  long: string;
+  short: string;
+}
 
 export default function Home() {
+  const [longUrl, setLongUrl] = useState("");
+  const [createdUrls, setCreatedUrls] = useState<Url[]>([]);
+
   function getShortUrl(longUrl: string) {
-    fetch(`localhost:8080/shorten?long=${longUrl}`).then((res) => {
-      res.json().then((data) => {
-        console.log(data);
-      });
+    axios.post(`http://localhost:8080/shorten?long=${longUrl}`).then((res) => {
+      setCreatedUrls([...createdUrls, res.data]);
     });
   }
 
@@ -26,8 +34,17 @@ export default function Home() {
             <input
               placeholder="Enter link here"
               className="px-4 py-2 block sm:w-2/3 lg:w-3/4 border border-grey-800 outline-none  focus:border-black mr-3 lg:mr-10"
+              value={longUrl}
+              onChange={(e) => {
+                setLongUrl(e.target.value);
+              }}
             />
-            <button className="font-bold mt-5 sm:mt-0 px-4 py-2 sm:w-1/3 lg:w-1/4 bg-blue-500 hover:bg-blue-700 text-white border border-blue-700 rounded">
+            <button
+              className="font-bold mt-5 sm:mt-0 px-4 py-2 sm:w-1/3 lg:w-1/4 bg-blue-500 hover:bg-blue-700 text-white border border-blue-700 rounded"
+              onClick={(e) => {
+                getShortUrl(longUrl);
+              }}
+            >
               Shorten URL
             </button>
           </div>
@@ -40,7 +57,11 @@ export default function Home() {
         </div>
       </div>
       <div className="m-5">
-        <ShortURL longURL="henryhelm.com" shortURL="linkshrink.io/rgzbyax" />
+        {createdUrls.map((url) => {
+          return (
+            <ShortURL key={url.short} longURL={url.long} shortURL={url.short} />
+          );
+        })}
       </div>
     </div>
   );
