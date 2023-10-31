@@ -74,6 +74,7 @@ GEM
       minitest (>= 5.1)
       mutex_m
       tzinfo (~> 2.0)
+    base62 (1.0.0)
     base64 (0.1.1)
     bigdecimal (3.1.4)
     bootsnap (1.17.0)
@@ -187,6 +188,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  base62 (~> 1.0)
   bootsnap
   debug
   error_highlight (>= 0.4.0)
