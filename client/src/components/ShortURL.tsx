@@ -35,9 +35,6 @@ export default function ShortURL({ longURL, shortURL }: ShortURLProps) {
           Copy
         </div>
       </div>
-      <div className="absolute top-0 right-0 hover:text-blue-500 cursor-pointer p-2">
-        <MdClose size="1.5em" />
-      </div>
     </div>
   );
 }
