@@ -36,6 +36,6 @@ class UrlsController < ApplicationController
   private
     def shorten_url(long_url)
       uuid = SecureRandom.uuid.gsub("-", "").hex
-      return Base62.encode(uuid)   
+      return Base62.encode(uuid)[0..4]   
     end
 end
