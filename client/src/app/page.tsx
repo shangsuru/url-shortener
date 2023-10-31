@@ -14,9 +14,11 @@ export default function Home() {
   const [createdUrls, setCreatedUrls] = useState<Url[]>([]);
 
   function getShortUrl(longUrl: string) {
-    axios.post(`http://localhost:8080/shorten?long=${longUrl}`).then((res) => {
-      setCreatedUrls([...createdUrls, res.data]);
-    });
+    axios
+      .post(`${process.env.NEXT_PUBLIC_BACKEND_API}/shorten?long=${longUrl}`)
+      .then((res) => {
+        setCreatedUrls([...createdUrls, res.data]);
+      });
   }
 
   return (
@@ -59,7 +61,11 @@ export default function Home() {
       <div className="m-5">
         {createdUrls.map((url) => {
           return (
-            <ShortURL key={url.short} longURL={url.long} shortURL={url.short} />
+            <ShortURL
+              key={url.short}
+              longURL={url.long}
+              shortURL={`${process.env.NEXT_PUBLIC_BACKEND_API}/${url.short}`}
+            />
           );
         })}
       </div>

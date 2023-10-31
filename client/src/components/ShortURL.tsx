@@ -13,7 +13,7 @@ export default function ShortURL({ longURL, shortURL }: ShortURLProps) {
     <div className="relative card sm:flex sm:flex-left sm:justify-around max-w-2xl">
       <div className="p-2">
         <span className="font-bold mr-3">{longURL}</span>
-        <a className="link" href={shortURL}>
+        <a className="link" href={longURL}>
           {shortURL}
         </a>
       </div>
