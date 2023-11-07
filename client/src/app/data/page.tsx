@@ -1,12 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import WorldMap from "react-svg-worldmap";
 import BarChart from "@/components/BarChart";
 import { MdOpenInNew, MdContentCopy } from "react-icons/md";
 import QRCodeModal from "@/components/QRCodeModal";
 import Tooltip from "@mui/material/Tooltip";
+import MuiAlert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
 
 export default function Data() {
+  const [show, setShow] = useState(false);
+
   const mapData = [
     { country: "cn", value: 1389618778 }, // china
     { country: "in", value: 1311559204 }, // india
@@ -22,6 +27,16 @@ export default function Data() {
 
   return (
     <div>
+      <Snackbar open={show} autoHideDuration={6000}>
+        <MuiAlert
+          elevation={10}
+          variant="filled"
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Copied to clipboard!
+        </MuiAlert>
+      </Snackbar>
       <div className="card">
         <div className="relative xl:flex xl:flex-left xl:justify-around">
           <div className="mb-10 text-xl">
@@ -45,6 +60,7 @@ export default function Data() {
                     className="hover p-2"
                     onClick={() => {
                       navigator.clipboard.writeText("shortURL");
+                      setShow(true);
                     }}
                   >
                     <MdContentCopy color="grey" size="1.5em" />
