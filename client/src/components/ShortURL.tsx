@@ -8,13 +8,21 @@ interface ShortURLProps {
   shortURL: string;
 }
 
+function displayURL(url: string) {
+  url = url.replace("https://", "").replace("http://", "");
+  if (url.length > 20) {
+    return url.slice(0, 20) + "...";
+  }
+  return url;
+}
+
 export default function ShortURL({ longURL, shortURL }: ShortURLProps) {
   return (
     <div className="relative card sm:flex sm:flex-left sm:justify-around max-w-2xl">
       <div className="p-2">
-        <span className="font-bold mr-3">{longURL}</span>
+        <span className="font-bold mr-3">{displayURL(longURL)}</span>
         <a className="link" href={longURL}>
-          {shortURL}
+          {displayURL(shortURL)}
         </a>
       </div>
       <div className="flex flex-left">
