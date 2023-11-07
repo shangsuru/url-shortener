@@ -5,14 +5,7 @@ import ShortURL from "@/components/ShortURL";
 import axios from "axios";
 
 import Snackbar from "@mui/material/Snackbar";
-import MuiAlert, { AlertProps } from "@mui/material/Alert";
-
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  props,
-  ref
-) {
-  return <MuiAlert elevation={10} ref={ref} variant="filled" {...props} />;
-});
+import MuiAlert from "@mui/material/Alert";
 
 interface Url {
   long: string;
@@ -69,9 +62,15 @@ export default function Home() {
   return (
     <div className="mt-20 sm:mx-20">
       <Snackbar open={showError} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+        <MuiAlert
+          elevation={10}
+          variant="filled"
+          onClose={handleClose}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
           {errorMessage}
-        </Alert>
+        </MuiAlert>
       </Snackbar>
       <div>
         <div className="card max-w-[1500px] text-md md:text-xl lg:text-2xl 2xl:text-4xl">
