@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MdBarChart } from "react-icons/md";
+import { MdBarChart, MdClose } from "react-icons/md";
 import QRCodeModal from "./QRCodeModal";
 import Tooltip from "@mui/material/Tooltip";
 import MuiAlert from "@mui/material/Alert";
@@ -10,6 +10,7 @@ import Snackbar from "@mui/material/Snackbar";
 interface ShortURLProps {
   longURL: string;
   shortURL: string;
+  removeURLFromLocalStorage: (longURL: string) => void;
 }
 
 function displayURL(url: string) {
@@ -20,7 +21,11 @@ function displayURL(url: string) {
   return url;
 }
 
-export default function ShortURL({ longURL, shortURL }: ShortURLProps) {
+export default function ShortURL({
+  longURL,
+  shortURL,
+  removeURLFromLocalStorage,
+}: ShortURLProps) {
   const [show, setShow] = useState(false);
 
   return (
@@ -63,6 +68,9 @@ export default function ShortURL({ longURL, shortURL }: ShortURLProps) {
         >
           Copy
         </div>
+      </div>
+      <div className="absolute top-0 right-0 hover:text-blue-500 cursor-pointer p-2">
+        <MdClose size="1.5em" onClick={removeURLFromLocalStorage} />
       </div>
     </div>
   );

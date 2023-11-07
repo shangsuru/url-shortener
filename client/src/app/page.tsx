@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ShortURL from "@/components/ShortURL";
 import axios from "axios";
 
@@ -17,6 +17,27 @@ export default function Home() {
   const [createdUrls, setCreatedUrls] = useState<Url[]>([]);
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    restoreURLsFromLocalStorage();
+  }, []);
+
+  function restoreURLsFromLocalStorage() {
+    const urls = localStorage.getItem("createdUrls");
+    if (urls) {
+      setCreatedUrls(JSON.parse(urls));
+    }
+  }
+
+  function removeURLFromLocalStorage(longURL: string) {
+    const urls = localStorage.getItem("createdUrls");
+    if (urls) {
+      const urlsArr: Url[] = JSON.parse(urls);
+      const filteredUrls = urlsArr.filter((url) => url.long !== longURL);
+      setCreatedUrls(filteredUrls);
+      localStorage.setItem("createdUrls", JSON.stringify(filteredUrls));
+    }
+  }
 
   function getShortUrl(longUrl: string) {
     // if it doesnt start with http:// or https://, add it
@@ -45,6 +66,10 @@ export default function Home() {
           return;
         }
         setCreatedUrls([...createdUrls, res.data]);
+        localStorage.setItem(
+          "createdUrls",
+          JSON.stringify([...createdUrls, res.data])
+        );
       })
       .catch((err) => {
         setShowError(true);
@@ -114,6 +139,9 @@ export default function Home() {
               key={url.short}
               longURL={url.long}
               shortURL={`${process.env.NEXT_PUBLIC_BACKEND_API}/${url.short}`}
+              removeURLFromLocalStorage={() =>
+                removeURLFromLocalStorage(url.long)
+              }
             />
           );
         })}
