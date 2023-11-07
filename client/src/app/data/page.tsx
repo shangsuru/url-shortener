@@ -2,8 +2,9 @@
 
 import WorldMap from "react-svg-worldmap";
 import BarChart from "@/components/BarChart";
-import { MdQrCode2, MdOpenInNew, MdContentCopy } from "react-icons/md";
+import { MdOpenInNew, MdContentCopy } from "react-icons/md";
 import QRCodeModal from "@/components/QRCodeModal";
+import Tooltip from "@mui/material/Tooltip";
 
 export default function Data() {
   const mapData = [
@@ -27,23 +28,28 @@ export default function Data() {
             <div className="sm:flex sm:flex-left">
               <div className="p-2 mr-20 font-bold">shortURL</div>
               <div className="flex flex-left">
-                <div className="hover p-2">
-                  <a href="shortURL" target="_blank">
-                    <MdOpenInNew color="grey" size="1.5em" />
-                  </a>
-                </div>
-
-                <div className="hover p-2">
-                  <QRCodeModal value="shortURL" />
-                </div>
-                <div
-                  className="hover p-2"
-                  onClick={() => {
-                    navigator.clipboard.writeText("shortURL");
-                  }}
-                >
-                  <MdContentCopy color="grey" size="1.5em" />
-                </div>
+                <Tooltip title="Open in new tab">
+                  <div className="hover p-2">
+                    <a href="shortURL" target="_blank">
+                      <MdOpenInNew color="grey" size="1.5em" />
+                    </a>
+                  </div>
+                </Tooltip>
+                <Tooltip title="View QR Code">
+                  <div className="hover p-2">
+                    <QRCodeModal value="shortURL" />
+                  </div>
+                </Tooltip>
+                <Tooltip title="Copy to clipboard">
+                  <div
+                    className="hover p-2"
+                    onClick={() => {
+                      navigator.clipboard.writeText("shortURL");
+                    }}
+                  >
+                    <MdContentCopy color="grey" size="1.5em" />
+                  </div>
+                </Tooltip>
               </div>
             </div>
             <div className="mt-5 text-xl">
