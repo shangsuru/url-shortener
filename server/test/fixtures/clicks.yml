@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  url: one
+  country: MyString
+  timeOfDay: MyString
+
+two:
+  url: two
+  country: MyString
+  timeOfDay: MyString
