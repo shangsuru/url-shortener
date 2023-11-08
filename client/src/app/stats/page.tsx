@@ -1,8 +1,6 @@
-export default function Stats() {
-  function getStats(shortUrl: string) {
-    console.log("TODO");
-  }
+"use client";
 
+export default function Stats() {
   return (
     <div className="mt-20 sm:mx-20">
       <div>

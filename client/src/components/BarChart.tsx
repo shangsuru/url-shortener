@@ -1,4 +1,5 @@
-import useWindowDimensions from "@/hooks/useWindowDimensions";
+"use client";
+
 import {
   BarChart,
   Bar,
@@ -10,7 +11,9 @@ import {
 } from "recharts";
 
 export default function ClickChart() {
-  const { width, height } = useWindowDimensions();
+  const width = 1000;
+  const height = 1000;
+
   const data = [
     {
       time: "1AM",
@@ -111,7 +114,7 @@ export default function ClickChart() {
   ];
 
   return (
-    <ResponsiveContainer width="90%" height={width < 640 ? 150 : 300}>
+    <ResponsiveContainer width="92%" height={width < 640 ? 150 : 300}>
       <BarChart
         width={500}
         height={300}

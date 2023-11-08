@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import WorldMap from "react-svg-worldmap";
 import BarChart from "@/components/BarChart";
 import { MdOpenInNew, MdContentCopy } from "react-icons/md";
@@ -10,20 +11,33 @@ import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 
 export default function Data() {
-  const [show, setShow] = useState(false);
+  const searchParams = new URLSearchParams(window.location.search);
 
-  const mapData = [
-    { country: "cn", value: 1389618778 }, // china
-    { country: "in", value: 1311559204 }, // india
-    { country: "us", value: 331883986 }, // united states
-    { country: "id", value: 264935824 }, // indonesia
-    { country: "pk", value: 210797836 }, // pakistan
-    { country: "br", value: 210301591 }, // brazil
-    { country: "ng", value: 208679114 }, // nigeria
-    { country: "bd", value: 161062905 }, // bangladesh
-    { country: "ru", value: 141944641 }, // russia
-    { country: "mx", value: 127318112 }, // mexico
-  ];
+  const [show, setShow] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
+  const [countryData, setCountryData] = useState([]);
+  const [timeData, setTimeData] = useState([]);
+
+  useEffect(() => {
+    const shortUrl = searchParams.get("url");
+    if (shortUrl) {
+      getStats(shortUrl);
+    }
+  }, []);
+
+  function getStats(shortUrl: string) {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_API}/stats/${shortUrl}`)
+      .then((res) => {
+        console.log(res.data);
+        setClickCount(res.data.count);
+        setCountryData(res.data.country_counts);
+        console.log(res.data.country_counts);
+      });
+  }
+
+  const shortUrl =
+    process.env.NEXT_PUBLIC_BACKEND_API + "/" + searchParams.get("url");
 
   return (
     <div>
@@ -41,7 +55,7 @@ export default function Data() {
         <div className="relative xl:flex xl:flex-left xl:justify-around">
           <div className="mb-10 text-xl">
             <div className="sm:flex sm:flex-left">
-              <div className="p-2 mr-20 font-bold">shortURL</div>
+              <div className="p-2 mr-20 font-bold">{shortUrl}</div>
               <div className="flex flex-left">
                 <Tooltip title="Open in new tab">
                   <div className="hover p-2">
@@ -52,14 +66,14 @@ export default function Data() {
                 </Tooltip>
                 <Tooltip title="View QR Code">
                   <div className="hover p-2">
-                    <QRCodeModal value="shortURL" />
+                    <QRCodeModal value={shortUrl} />
                   </div>
                 </Tooltip>
                 <Tooltip title="Copy to clipboard">
                   <div
                     className="hover p-2"
                     onClick={() => {
-                      navigator.clipboard.writeText("shortURL");
+                      navigator.clipboard.writeText(shortUrl);
                       setShow(true);
                     }}
                   >
@@ -69,14 +83,14 @@ export default function Data() {
               </div>
             </div>
             <div className="mt-5 text-xl">
-              Total Clicks <span className="text-blue-500">1234</span>
+              Total Clicks <span className="text-blue-500">{clickCount}</span>
             </div>
           </div>
           <div className="xl:ml-10">
             <WorldMap
               color="var(--foreground)"
               size="responsive"
-              data={mapData}
+              data={countryData}
               valueSuffix="%"
               backgroundColor="var(--card)"
             />

@@ -54,7 +54,7 @@ export default function ShortURL({
         </Tooltip>
         <Tooltip title="View stats">
           <div className="hover p-2">
-            <a href={`data?url=${shortURL}`}>
+            <a href={`data?url=${shortURL.split("/").pop()}`}>
               <MdBarChart color="grey" size="1.5em" />
             </a>
           </div>
