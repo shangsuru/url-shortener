@@ -29,7 +29,8 @@ class UrlsController < ApplicationController
       url.update(last_read_at: Time.now)
       # record click
       country = Geocoder.search(request.remote_ip).first.country
-      click = Click.new(short_url: short_url, country: Geocoder.search(request.remote_ip).first.country)
+      country ||= "jp" # default value just for testing purposes
+      click = Click.new(short_url: short_url, country: country)
       click.save
       redirect_to url.long, status: 302, allow_other_host: true
     else
