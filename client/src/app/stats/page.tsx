@@ -1,6 +1,17 @@
 "use client";
 
+import { useState } from "react";
+
+function redirectToStatsPage(url: string) {
+  if (url.length > 0) {
+    let linkShrink = url.split("/").pop();
+    window.location.href = `/data?url=${linkShrink}`;
+  }
+}
+
 export default function Stats() {
+  const [url, setUrl] = useState("");
+
   return (
     <div className="mt-20 sm:mx-20">
       <div>
@@ -16,9 +27,14 @@ export default function Stats() {
           <div className="sm:flex sm:justify-center sm:items-center sm:flex-left mt-10 2xl:mt-20">
             <input
               placeholder="Enter your LinkShrink here"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
               className="px-4 py-2 block sm:w-2/3 lg:w-3/4 border border-grey-800 outline-none  focus:border-black mr-3 lg:mr-10"
             />
-            <button className="font-bold mt-5 sm:mt-0 px-4 py-2 sm:w-1/3 lg:w-1/4 bg-blue-500 hover:bg-blue-700 text-white border border-blue-700 rounded">
+            <button
+              className="font-bold mt-5 sm:mt-0 px-4 py-2 sm:w-1/3 lg:w-1/4 bg-blue-500 hover:bg-blue-700 text-white border border-blue-700 rounded"
+              onClick={() => redirectToStatsPage(url)}
+            >
               View Clicks
             </button>
           </div>
