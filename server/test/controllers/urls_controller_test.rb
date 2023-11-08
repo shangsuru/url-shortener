@@ -25,7 +25,7 @@ class UrlsControllerTest < ActionDispatch::IntegrationTest
     assert_response 404
   end
 
-  test "does not create a new url if long url already exists in the database" do 
+  test "does not create a new url if long url already exists in the database" do
     post "/shorten", params: { long: "https://www.google.com" }
     assert_response 201
     post "/shorten", params: { long: "https://www.google.com" }
@@ -46,5 +46,18 @@ class UrlsControllerTest < ActionDispatch::IntegrationTest
     t2 = url.last_read_at
     assert_not_nil url.last_read_at
     assert t2 > t1
+  end
+
+  test "records clicks" do
+    short_url = "abcdef"
+    japanese_ip = "101.102.128.0"
+    get "/#{short_url}", headers: { "X-Forwarded-For" => japanese_ip}
+    click = Click.find_by(short_url: short_url)
+    assert_not_nil click
+    assert_equal "JP", click.country
+    assert_equal 1, Click.count
+
+    get "/#{short_url}"
+    assert_equal 2, Click.count
   end
 end

@@ -1,7 +1,7 @@
 class UrlsController < ApplicationController
 
   # POST /shorten
-  def shorten 
+  def shorten
     long_url = params[:long]
 
     # check if long_url already exists
@@ -18,7 +18,7 @@ class UrlsController < ApplicationController
       render json: url.to_json( :only => [:short, :long] ), status: :created
     else
       render json: { error: "Invalid URL" }, status: :unprocessable_entity
-    end 
+    end
   end
 
   # GET /:short
@@ -27,6 +27,10 @@ class UrlsController < ApplicationController
     url = Url.find_by(short: short_url)
     if url
       url.update(last_read_at: Time.now)
+      # record click
+      country = Geocoder.search(request.remote_ip).first.country
+      click = Click.new(short_url: short_url, country: Geocoder.search(request.remote_ip).first.country)
+      click.save
       redirect_to url.long, status: 302, allow_other_host: true
     else
       render json: "Not Found", status: 404
@@ -36,6 +40,6 @@ class UrlsController < ApplicationController
   private
     def shorten_url(long_url)
       uuid = SecureRandom.uuid.gsub("-", "").hex
-      return Base62.encode(uuid)[0..4]   
+      return Base62.encode(uuid)[0..4]
     end
 end

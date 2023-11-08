@@ -5,6 +5,6 @@ Rails.application.routes.draw do
 
   post "/shorten" => "urls#shorten"
   get "/:short" => "urls#lookup_and_redirect"
-
+  get "/stats/:url" => "clicks#get_stats_for_url"
 
 end

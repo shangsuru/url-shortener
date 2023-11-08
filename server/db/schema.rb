@@ -13,6 +13,7 @@
 ActiveRecord::Schema[7.1].define(version: 2023_11_07_114714) do
   create_table "clicks", force: :cascade do |t|
     t.string "country"
+    t.string "timeOfDay"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "short_url"
