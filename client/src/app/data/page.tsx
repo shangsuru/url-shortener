@@ -32,7 +32,7 @@ export default function Data() {
         console.log(res.data);
         setClickCount(res.data.count);
         setCountryData(res.data.country_counts);
-        console.log(res.data.country_counts);
+        setTimeData(res.data.time_counts);
       });
   }
 
@@ -96,7 +96,7 @@ export default function Data() {
             />
           </div>
         </div>
-        <BarChart />
+        <BarChart data={timeData} />
       </div>
     </div>
   );
