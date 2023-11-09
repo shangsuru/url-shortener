@@ -41,8 +41,10 @@ export default function ShortURL({
         </MuiAlert>
       </Snackbar>
       <div className="p-2">
-        <span className="font-bold mr-3">{displayURL(longURL)}</span>
-        <a className="link" href={longURL}>
+        <span id="longURL" className="font-bold mr-3">
+          {displayURL(longURL)}
+        </span>
+        <a id="shortURL" className="link" href={longURL}>
           {displayURL(shortURL)}
         </a>
       </div>
@@ -70,7 +72,7 @@ export default function ShortURL({
         </div>
       </div>
       <div className="absolute top-0 right-0 hover:text-blue-500 cursor-pointer p-2">
-        <MdClose size="1.5em" onClick={removeURLFromLocalStorage} />
+        <MdClose id="close" size="1.5em" onClick={removeURLFromLocalStorage} />
       </div>
     </div>
   );
